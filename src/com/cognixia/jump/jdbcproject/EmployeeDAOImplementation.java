@@ -44,7 +44,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	public Employee getEmployeeById(int id) throws CustomException {
 		Employee employee = null;
 		try {
-			if(id < 0) {
+			if (id < 0) {
 				throw new CustomException("ID cannot be negative");
 			}
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees WHERE id = ?");
@@ -65,20 +65,21 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (CustomException ce) {
+		} catch (CustomException ce) {
 			ce.printStackTrace();
 		}
 		return employee;
 	}
 
 	@Override
-	public Employee getEmployeeByFirstName(String fName) throws CustomException{
+	public Employee getEmployeeByFirstName(String fName) throws CustomException {
 		Employee employee = null;
 		try {
-			if(fName.isBlank()) {
+
+			if (fName.isBlank()) {
 				throw new CustomException("Name search field cannot be blank");
 			}
+
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees WHERE first_name = ?");
 			statement.setString(1, fName);
 			ResultSet rs = statement.executeQuery();
@@ -97,9 +98,6 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		catch (CustomException ce) {
-			ce.printStackTrace(); //Needed?
 		}
 		return employee;
 	}

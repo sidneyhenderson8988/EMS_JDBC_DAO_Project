@@ -8,9 +8,9 @@ public class Employee {
 	private String department;
 	private int salary;
 	private int vacationDays;
-	
-	public Employee(){
-		
+
+	public Employee() {
+
 	}
 
 	public Employee(int id, String empFname, String empLname, String department, int salary, int vacationDays) {
@@ -22,7 +22,7 @@ public class Employee {
 		this.salary = salary;
 		this.vacationDays = vacationDays;
 	}
-	
+
 	public Employee(String empFname, String empLname, String department, int salary, int vacationDays) {
 		super();
 		this.empFname = empFname;
@@ -82,10 +82,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "\nEmployee [id=" + id + ", First Name=" + empFname + ", Last Name=" + empLname + ", Department=" + department
-				+ ", Salary=" + salary + ", Vacation Days=" + vacationDays + "]";
+		return "\nEmployee [id=" + id + ", First Name=" + empFname + ", Last Name=" + empLname + ", Department="
+				+ department + ", Salary=" + salary + ", Vacation Days=" + vacationDays + "]";
 	}
-	
-	
-	
+
 }

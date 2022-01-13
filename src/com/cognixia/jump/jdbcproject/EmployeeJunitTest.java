@@ -71,7 +71,7 @@ class EmployeeJunitTest {
 	@Test
 	void testDeleteEmployee() throws CustomException {
 		
-		Employee delete = new Employee(19,"Junit","Test","Data",55555,1);
+		Employee delete = new Employee(23,"Junit","Test","Data",55555,1);
 		Boolean actual = runner.deleteEmployee(delete);
 		assertTrue(actual);
 	}
