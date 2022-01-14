@@ -14,7 +14,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	private Connection connection = ConnectionManager.getConnection();
 
 	@Override
-	public List<Employee> getAllEmployees() {
+	public List<Employee> getAllEmployees() { // Returns a list of all employees in database.
 		List<Employee> employees = new ArrayList<Employee>();
 
 		try {
@@ -41,7 +41,8 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	}
 
 	@Override
-	public Employee getEmployeeById(int id) throws CustomException {
+	public Employee getEmployeeById(int id) throws CustomException { // Returns an employee with matching ID from
+																		// database.
 		Employee employee = null;
 		try {
 			if (id < 0) {
@@ -65,19 +66,23 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		
+
 		}
 		return employee;
 	}
-	
+
 	@Override
-	public Employee getEmployeeAddressById(int id) throws CustomException {
+	public Employee getEmployeeAddressById(int id) throws CustomException { // Returns an employee and address
+																			// information with matching ID from
+																			// database.
 		Employee employee = null;
 		try {
 			if (id < 0) {
 				throw new CustomException("ID cannot be negative");
 			}
-			PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees LEFT JOIN address ON employees.id = address.employee_id WHERE id = ?");
+			PreparedStatement statement = connection
+					.prepareStatement("SELECT * FROM employees LEFT JOIN address ON employees.id = "
+							+ "address.employee_id WHERE id = ?"); // Perform left join on address table.
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
 
@@ -92,19 +97,21 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 				String city = rs.getString("city");
 				String zipcode = rs.getString("zipcode");
 
-				employee = new Employee(empId, empFname, empLname, department, salary, vacationDays, address, city, zipcode);
+				employee = new Employee(empId, empFname, empLname, department, salary, vacationDays, address, city,
+						zipcode);
 			}
 			rs.close();
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		
+
 		}
 		return employee;
 	}
 
 	@Override
-	public Employee getEmployeeByFirstName(String fName) throws CustomException {
+	public Employee getEmployeeByFirstName(String fName) throws CustomException { // Returns an employee with matching
+																					// first name from database.
 		Employee employee = null;
 		try {
 			if (fName.isBlank()) {
@@ -133,7 +140,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	}
 
 	@Override
-	public Employee getEmployeeByLastName(String lName) {
+	public Employee getEmployeeByLastName(String lName) { // Returns an employee with matching last name from database.
 		Employee employee = null;
 		try {
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees WHERE last_name = ?");
@@ -159,7 +166,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	}
 
 	@Override
-	public boolean addEmployee(Employee employee) {
+	public boolean addEmployee(Employee employee) { // Adds a new employee entry to the database.
 		int count = 0;
 		try {
 			PreparedStatement statement = connection
@@ -184,7 +191,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	}
 
 	@Override
-	public boolean updateEmployee(Employee employee) {
+	public boolean updateEmployee(Employee employee) { // Updates an employee from database based on matching ID.
 		int count = 0;
 		try {
 			PreparedStatement statement = connection.prepareStatement("UPDATE employees "
@@ -211,7 +218,7 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	}
 
 	@Override
-	public boolean deleteEmployee(Employee employee) {
+	public boolean deleteEmployee(Employee employee) { // Deletes an employee from database with matching ID
 		int count = 0;
 		try {
 			PreparedStatement statement = connection.prepareStatement("DELETE FROM employees WHERE id = ?");

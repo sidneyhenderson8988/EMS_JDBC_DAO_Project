@@ -34,8 +34,9 @@ public class Employee {
 		this.salary = salary;
 		this.vacationDays = vacationDays;
 	}
-	
-	public Employee(int id, String empFname, String empLname, String department, int salary, int vacationDays, String address, String city, String zipcode) {
+
+	public Employee(int id, String empFname, String empLname, String department, int salary, int vacationDays,
+			String address, String city, String zipcode) {
 		super();
 		this.id = id;
 		this.empFname = empFname;
@@ -95,7 +96,7 @@ public class Employee {
 	public void setVacationDays(int vacationDays) {
 		this.vacationDays = vacationDays;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
@@ -128,7 +129,7 @@ public class Employee {
 
 	public String toStringWithAddress() {
 		return "\nEmployee [id=" + id + ", First Name=" + empFname + ", Last Name=" + empLname + ", Department="
-				+ department + ", Salary=" + salary + ", Vacation Days=" + vacationDays + ", Address=" + address +
-				", City=" + city + ", Zipcode=" + zipcode + "]";
+				+ department + ", Salary=" + salary + ", Vacation Days=" + vacationDays + ", Address=" + address
+				+ ", City=" + city + ", Zipcode=" + zipcode + "]";
 	}
 }

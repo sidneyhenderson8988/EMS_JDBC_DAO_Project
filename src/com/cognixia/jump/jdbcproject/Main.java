@@ -18,12 +18,11 @@ public class Main {
 
 	public static void main(String[] args) throws CustomException {
 
-		EmployeeDAOImplementation runner = new EmployeeDAOImplementation();
 		Scanner input = new Scanner(System.in);
 		int again = 0;
 
 		do {
-			System.out.println("** Welcome to Sidney's EMS; please enter a selection below. **");
+			System.out.println("** Welcome to Sidney's EMS; please enter a selection below. **\n");
 			System.out.println("1. View all employees\n2. View employee by ID\n3. View employee by First Name\n"
 					+ "4. View employee by Last name\n5. Add a new employee\n6. Update existing employee\n7. Delete existing employee"
 					+ "\n8. Get employee with address by ID\n");
@@ -32,82 +31,37 @@ public class Main {
 
 			switch (option) {
 			case 1:
-				System.out.println(runner.getAllEmployees());
+				MenuChoices.getAll();
 				break;
 
 			case 2:
-				System.out.println("Please enter an ID: ");
-				int inputId = input.nextInt();
-				System.out.println(runner.getEmployeeById(inputId));
+				MenuChoices.getEmpId();
 				break;
 
 			case 3:
-				System.out.println("Please enter a first name: ");
-				String inputFname = input.next();
-				System.out.println(runner.getEmployeeByFirstName(inputFname));
+				MenuChoices.getEmpFname();
 				break;
 
 			case 4:
-				System.out.println("Please enter a last name: ");
-				String inputLname = input.next();
-				System.out.println(runner.getEmployeeByLastName(inputLname));
+				MenuChoices.getEmpLname();
 				break;
 
 			case 5:
-				System.out.println("Please enter a first name: ");
-				String newFname = input.next();
-				System.out.println("Please enter a last name: ");
-				String newLname = input.next();
-				System.out.println("Please enter a department name: ");
-				String newDept = input.next();
-				System.out.println("Please enter a salary: ");
-				int newSal = input.nextInt();
-				System.out.println("Please enter remaining vacation days: ");
-				int newVac = input.nextInt();
-
-				Employee addNew = new Employee(newFname, newLname, newDept, newSal, newVac);
-				if (runner.addEmployee(addNew) == true) {
-					System.out.println("New employee added successfully!");
-				} else
-					System.out.println("Something went wrong...");
+				MenuChoices.addNewEmp();
 				break;
 
 			case 6:
-				System.out.println("Please enter the ID of the employee you want to update: ");
-				int updateId = input.nextInt();
-				System.out.println("Please enter a first name: ");
-				String updateFname = input.next();
-				System.out.println("Please enter a last name: ");
-				String updateLname = input.next();
-				System.out.println("Please enter a department name: ");
-				String updateDept = input.next();
-				System.out.println("Please enter a salary: ");
-				int updateSal = input.nextInt();
-				System.out.println("Please enter remaining vacation days: ");
-				int updateVac = input.nextInt();
-
-				Employee addUpdate = new Employee(updateId, updateFname, updateLname, updateDept, updateSal, updateVac);
-				if (runner.updateEmployee(addUpdate) == true) {
-					System.out.println("Employee updated successfully!");
-				} else
-					System.out.println("Something went wrong...");
+				MenuChoices.updateEmp();
 				break;
 
 			case 7:
-				System.out.println("Please enter the ID of the employee you want to delete: ");
-				int deleteId = input.nextInt();
-				if (runner.deleteEmployee(runner.getEmployeeById(deleteId)) == true) {
-					System.out.println("Employee delete successful!");
-				} else
-					System.out.println("Something went wrong with update...");
+				MenuChoices.deleteEmp();
 				break;
 
 			case 8:
-				System.out.println("Please enter an ID: ");
-				int inputIdAddress = input.nextInt();
-				System.out.println(runner.getEmployeeById(inputIdAddress).toStringWithAddress());
+				MenuChoices.getEmpAddress();
 				break;
-				
+
 			default:
 				System.out.println("Invalid selection, please try again.");
 				break;
