@@ -65,8 +65,40 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (CustomException ce) {
-			ce.printStackTrace();
+		
+		}
+		return employee;
+	}
+	
+	@Override
+	public Employee getEmployeeAddressById(int id) throws CustomException {
+		Employee employee = null;
+		try {
+			if (id < 0) {
+				throw new CustomException("ID cannot be negative");
+			}
+			PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees LEFT JOIN address ON employees.id = address.employee_id WHERE id = ?");
+			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				int empId = rs.getInt(1);
+				String empFname = rs.getString("first_name");
+				String empLname = rs.getString("last_name");
+				String department = rs.getString("department");
+				int salary = rs.getInt("salary");
+				int vacationDays = rs.getInt("vacation_days");
+				String address = rs.getString("address");
+				String city = rs.getString("city");
+				String zipcode = rs.getString("zipcode");
+
+				employee = new Employee(empId, empFname, empLname, department, salary, vacationDays, address, city, zipcode);
+			}
+			rs.close();
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
 		}
 		return employee;
 	}
@@ -75,11 +107,9 @@ public class EmployeeDAOImplementation implements EmployeeDAO {
 	public Employee getEmployeeByFirstName(String fName) throws CustomException {
 		Employee employee = null;
 		try {
-
 			if (fName.isBlank()) {
 				throw new CustomException("Name search field cannot be blank");
 			}
-
 			PreparedStatement statement = connection.prepareStatement("SELECT * FROM employees WHERE first_name = ?");
 			statement.setString(1, fName);
 			ResultSet rs = statement.executeQuery();

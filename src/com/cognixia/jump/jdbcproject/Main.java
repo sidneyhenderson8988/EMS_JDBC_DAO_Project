@@ -25,7 +25,8 @@ public class Main {
 		do {
 			System.out.println("** Welcome to Sidney's EMS; please enter a selection below. **");
 			System.out.println("1. View all employees\n2. View employee by ID\n3. View employee by First Name\n"
-					+ "4. View Employee by Last name\n5. Add a new employee\n6. Update existing employee\n7. Delete existing employee\n");
+					+ "4. View employee by Last name\n5. Add a new employee\n6. Update existing employee\n7. Delete existing employee"
+					+ "\n8. Get employee with address by ID\n");
 
 			int option = input.nextInt();
 
@@ -101,6 +102,12 @@ public class Main {
 					System.out.println("Something went wrong with update...");
 				break;
 
+			case 8:
+				System.out.println("Please enter an ID: ");
+				int inputIdAddress = input.nextInt();
+				System.out.println(runner.getEmployeeById(inputIdAddress).toStringWithAddress());
+				break;
+				
 			default:
 				System.out.println("Invalid selection, please try again.");
 				break;

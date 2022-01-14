@@ -7,6 +7,8 @@ public interface EmployeeDAO {
 	public List<Employee> getAllEmployees();
 
 	public Employee getEmployeeById(int id) throws CustomException;
+	
+	public Employee getEmployeeAddressById(int id) throws CustomException;
 
 	public Employee getEmployeeByFirstName(String name) throws CustomException;
 
